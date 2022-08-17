@@ -1,0 +1,148 @@
+{
+    "productos": [
+      {
+        "id" : 1,
+        "nombre": "Cabeza stormtrooper blanca",
+        "precio": 100,
+        "descripcion": "Cabeza stormtrooper blanca",
+        "categoria": "StarWars",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 2,
+        "nombre": "Cabeza darthvader negra",
+        "precio": 100,
+        "descripcion": "Cabeza darthvader negra",
+        "categoria": "StarWars",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 3,
+        "nombre": "Yoda",
+        "precio": 100,
+        "descripcion": "Yoda",
+        "categoria": "StarWars",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 4,
+        "nombre": "Stormtrooper blanco",
+        "precio": 100,
+        "descripcion": "Stormtrooper blanco",
+        "categoria": "StarWars",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 5,
+        "nombre": "Baby Yoda",
+        "precio": 100,
+        "descripcion": "Baby Yoda",
+        "categoria": "StarWars",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 6,
+        "nombre": "kylo Ren",
+        "precio": 100,
+        "descripcion": "Kylo Ren",
+        "categoria": "StarWars",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 7,
+        "nombre": "mando xbox",
+        "precio": 100,
+        "descripcion": "mando xbox",
+        "categoria": "Consolas",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 8,
+        "nombre": "PS5",
+        "precio": 100,
+        "descripcion": "PS5",
+        "categoria": "Consolas",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 9,
+        "nombre": "Nintendo",
+        "precio": 100,
+        "descripcion": "Nintendo",
+        "categoria": "Consolas",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 10,
+        "nombre": "Nintendo Switch",
+        "precio": 100,
+        "descripcion": "Nintendo Switch",
+        "categoria": "Consolas",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 11,
+        "nombre": "XBOX X Series",
+        "precio": 100,
+        "descripcion": "XBOX X Series",
+        "categoria": "Consolas",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 12,
+        "nombre": "Game Boy color",
+        "precio": 100,
+        "descripcion": "Game Boy Color",
+        "categoria": "Consolas",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 13,
+        "nombre": "Camisa Atari",
+        "precio": 100,
+        "descripcion": "Camisa Atari",
+        "categoria": "Diversos",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 14,
+        "nombre": "Camisa SNES",
+        "precio": 100,
+        "descripcion": "Camisa SNES",
+        "categoria": "Diversos",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 15,
+        "nombre": "Munieco Sonic",
+        "precio": 100,
+        "descripcion": "Munieco Sonic",
+        "categoria": "Diversos",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 16,
+        "nombre": "Reloj Rosa",
+        "precio": 100,
+        "descripcion": "Reloj Rosa",
+        "categoria": "Diversos",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 17,
+        "nombre": "Gafas VR",
+        "precio": 100,
+        "descripcion": "Gafas VR",
+        "categoria": "Diversos",
+        "img": "../img/productoSinImagen.jpg"
+      },
+      {
+        "id" : 18,
+        "nombre": "Pikachu gigante",
+        "precio": 100,
+        "descripcion": "Pikachu gigante",
+        "categoria": "Diversos",
+        "img": "../img/productoSinImagen.jpg"
+      }
+    ]
+  }

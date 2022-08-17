@@ -21,479 +21,206 @@
     <link href="./styles/index.css" rel="stylesheet" type="text/css" />
     <title>Ecommerce PAK</title>
   </head>
-  <header>
-    <nav class="navbar navbar-dark bg-dark">
-      <div class="container-fluid">
-        <div class="logo">
-          <a href="#">
-            <img src="./img/favicon.svg" alt="control" />
-            <img src="./img/Alura.png" alt="alura" />
-            <img src="./img/Geek.png" alt="geek" />
-          </a>
-        </div>
-        <button
-          title="Menú expandible"
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasDarkNavbar"
-          aria-controls="offcanvasDarkNavbar"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="offcanvas offcanvas-end text-bg-dark"
-          tabindex="-1"
-          id="offcanvasDarkNavbar"
-          aria-labelledby="offcanvasDarkNavbarLabel"
-        >
-          <div class="offcanvas-header">
-            <div class="logo">
-              <a href="#">
-                <img src="./img/favicon.svg" alt="control" />
-                <img src="./img/Alura.png" alt="alura" />
-                <img src="./img/Geek.png" alt="geek" />
-              </a>
-            </div>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item centerLogin">
-                <button type="button" class="btn btn-primary">Login</button>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Ver todo</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Categorías
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Star Wars</a></li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li><a class="dropdown-item" href="#">Consolas</a></li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Diversos</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-primary" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <section>
-      <div class="backgroundImage">
-        <div class="promo">
-          <h2 class="white letraGrande">Febrero Promocional</h2>
-          <p class="white letraNegrita">
-            Productos seleccionados con 33% de descuento
-          </p>
-          <button type="button" class="btn btn-primary white">
-            Ver Consolas
-          </button>
-        </div>
-      </div>
-    </section>
-  </header>
   <body>
-    <section>
-      <div id="galeriaStarWars" class="paddingGaleria">
-        <div class="paddingTituloGaleria">
-          <h3 class="letraNegrita">Star Wars</h3>
-        </div>
-        <div class="row row-cols-12 row-cols-md-12 g-12">
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Star Wars"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto SW</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
+    <header>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div class="logo">
+            <a href="#">
+              <img src="./img/favicon.svg" alt="control" />
+              <img src="./img/Alura.png" alt="alura" />
+              <img src="./img/Geek.png" alt="geek" />
+            </a>
           </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Star Wars"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto SW</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Star Wars"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto SW</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Star Wars"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto SW</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Star Wars"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto SW</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Star Wars"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto SW</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div id="consolas" class="paddingGaleria">
-        <div class="paddingTituloGaleria">
-          <h3 class="letraNegrita">Consolas</h3>
-        </div>
-        <div class="row row-cols-12 row-cols-md-12 g-12">
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Consola"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto C</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Consola"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto C</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Consola"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto C</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Consola"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto C</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Consola"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto C</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Consola"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto C</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div id="diversos" class="paddingGaleria">
-        <div class="paddingTituloGaleria">
-          <h3 class="letraNegrita">Diversos</h3>
-        </div>
-        <div class="row row-cols-12 row-cols-md-12 g-12">
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Diversos"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto D</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Diversos"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto D</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Diversos"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto D</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Diversos"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto D</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Diversos"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto D</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-          <div class="col paddingCard">
-            <div class="card" style="width: 15rem">
-              <img
-                src="./img/productoSinImagen.png"
-                class="card-img-top"
-                alt="Imágen Diversos"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto D</h5>
-                <p class="card-text">$100</p>
-                <a href="#" class="btn btn-primary">Ver producto</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </body>
-  <footer>
-    <section>
-      <div class="container-fluid bg-dark">
-        <div class="row centerFooter">
-          <div
-            class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 centerFooter"
+          <button
+            title="Menú expandible"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar"
           >
-            <div class="logo paddingFooter">
-              <a href="#">
-                <img src="./img/favicon.svg" alt="control" />
-                <img src="./img/Alura.png" alt="alura" />
-                <img src="./img/Geek.png" alt="geek" />
-              </a>
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="offcanvas offcanvas-end text-bg-dark"
+            tabindex="-1"
+            id="offcanvasDarkNavbar"
+            aria-labelledby="offcanvasDarkNavbarLabel"
+          >
+            <div class="offcanvas-header">
+              <div class="logo">
+                <a href="#">
+                  <img src="./img/favicon.svg" alt="control" />
+                  <img src="./img/Alura.png" alt="alura" />
+                  <img src="./img/Geek.png" alt="geek" />
+                </a>
+              </div>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
             </div>
-          </div>
-          <div
-            class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 centerFooter"
-          >
-            <ul class="paddingFooter">
-              <li><a href="#" class="white">Quíenes somos</a></li>
-              <li><a href="#" class="white">Políticas de privacidad</a></li>
-              <li><a href="#" class="white">Programa de fidelidad</a></li>
-              <li><a href="#" class="white">Nuestras Tiendas</a></li>
-              <li><a href="#" class="white">Quiero ser franquiciado</a></li>
-              <li><a href="#" class="white">Anunciece Aquí</a></li>
-            </ul>
-          </div>
-          <div
-            class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 centerFooter"
-          >
-            <div class="paddingFooter">
-              <form action="">
-                <p class="white letraNegrita">Hable Nosotros</p>
-                <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label white"
-                    >Nombre y Apellido</label
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item centerLogin">
+                  <button type="button" class="btn btn-primary">Login</button>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Ver todo</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
                   >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Ingrese su nombre y apellido"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label
-                    for="exampleFormControlTextarea1"
-                    class="form-label white"
-                    >Escribe tu mensaje</label
-                  >
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="5"
-                    cols="40"
-                    placeholder="Escribe tu mensaje"
-                    required
-                  ></textarea>
-                </div>
-                <button type="button" class="btn btn-primary white">
-                  Enviar
-                </button>
+                    Categorías
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Star Wars</a></li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="#">Consolas</a></li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Diversos</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="d-flex" role="search">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-primary" type="submit">Search</button>
               </form>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section>
-      <div class="container-fluid">
-        <div class="row centerFooter">
-          <div
-            class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 centerFooter"
-          >
-            <div>
-              <p class="letraNegrita">
-                Desarrollado por
-                <a
-                  href="https://www.linkedin.com/in/kanaszycpatricio/"
-                  class="black"
-                  target="_blank"
-                  rel="noopener"
-                  >Patricio Kanaszyc</a
-                >
-              </p>
-              <p class="centerDevelopBy letraNegrita">2022</p>
+      </nav>
+      <section>
+        <div class="backgroundImage">
+          <div class="promo">
+            <h2 class="white letraGrande">Febrero Promocional</h2>
+            <p class="white letraNegrita">
+              Productos seleccionados con 33% de descuento
+            </p>
+            <button type="button" class="btn btn-primary white">
+              Ver Consolas
+            </button>
+          </div>
+        </div>
+      </section>
+    </header>
+    <main>
+      <div id="root"></div>
+    </main>
+    <footer>
+      <section>
+        <div class="container-fluid bg-dark">
+          <div class="row centerFooter">
+            <div
+              class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 centerFooter"
+            >
+              <div class="logo paddingFooter">
+                <a href="#">
+                  <img src="./img/favicon.svg" alt="control" />
+                  <img src="./img/Alura.png" alt="alura" />
+                  <img src="./img/Geek.png" alt="geek" />
+                </a>
+              </div>
+            </div>
+            <div
+              class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 centerFooter"
+            >
+              <ul class="paddingFooter">
+                <li><a href="#" class="white">Quíenes somos</a></li>
+                <li><a href="#" class="white">Políticas de privacidad</a></li>
+                <li><a href="#" class="white">Programa de fidelidad</a></li>
+                <li><a href="#" class="white">Nuestras Tiendas</a></li>
+                <li><a href="#" class="white">Quiero ser franquiciado</a></li>
+                <li><a href="#" class="white">Anunciece Aquí</a></li>
+              </ul>
+            </div>
+            <div
+              class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 centerFooter"
+            >
+              <div class="paddingFooter">
+                <form action="">
+                  <p class="white letraNegrita">Hable Nosotros</p>
+                  <div class="mb-3">
+                    <label
+                      for="exampleFormControlInput1"
+                      class="form-label white"
+                      >Nombre y Apellido</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleFormControlInput1"
+                      placeholder="Ingrese su nombre y apellido"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label
+                      for="exampleFormControlTextarea1"
+                      class="form-label white"
+                      >Escribe tu mensaje</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="5"
+                      cols="40"
+                      placeholder="Escribe tu mensaje"
+                      required
+                    ></textarea>
+                  </div>
+                  <button type="button" class="btn btn-primary white">
+                    Enviar
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </footer>
+      </section>
+      <section>
+        <div class="container-fluid">
+          <div class="row centerFooter">
+            <div
+              class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 centerFooter"
+            >
+              <div>
+                <p class="letraNegrita">
+                  Desarrollado por
+                  <a
+                    href="https://www.linkedin.com/in/kanaszycpatricio/"
+                    class="black"
+                    target="_blank"
+                    rel="noopener"
+                    >Patricio Kanaszyc</a
+                  >
+                </p>
+                <p class="centerDevelopBy letraNegrita">2022</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+    <script type="module" src="./js/index.js"></script>
+  </body>
 </html>
