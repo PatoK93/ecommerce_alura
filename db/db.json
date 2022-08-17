@@ -5,48 +5,48 @@
         "nombre": "Cabeza stormtrooper blanca",
         "precio": 100,
         "descripcion": "Cabeza stormtrooper blanca",
-        "categoria": "StarWars",
-        "img": "../img/productoSinImagen.jpg"
+        "categoria": "Star Wars",
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 2,
         "nombre": "Cabeza darthvader negra",
         "precio": 100,
         "descripcion": "Cabeza darthvader negra",
-        "categoria": "StarWars",
-        "img": "../img/productoSinImagen.jpg"
+        "categoria": "Star Wars",
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 3,
         "nombre": "Yoda",
         "precio": 100,
         "descripcion": "Yoda",
-        "categoria": "StarWars",
-        "img": "../img/productoSinImagen.jpg"
+        "categoria": "Star Wars",
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 4,
         "nombre": "Stormtrooper blanco",
         "precio": 100,
         "descripcion": "Stormtrooper blanco",
-        "categoria": "StarWars",
-        "img": "../img/productoSinImagen.jpg"
+        "categoria": "Star Wars",
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 5,
         "nombre": "Baby Yoda",
         "precio": 100,
         "descripcion": "Baby Yoda",
-        "categoria": "StarWars",
-        "img": "../img/productoSinImagen.jpg"
+        "categoria": "Star Wars",
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 6,
         "nombre": "kylo Ren",
         "precio": 100,
         "descripcion": "Kylo Ren",
-        "categoria": "StarWars",
-        "img": "../img/productoSinImagen.jpg"
+        "categoria": "Star Wars",
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 7,
@@ -54,7 +54,7 @@
         "precio": 100,
         "descripcion": "mando xbox",
         "categoria": "Consolas",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 8,
@@ -62,7 +62,7 @@
         "precio": 100,
         "descripcion": "PS5",
         "categoria": "Consolas",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 9,
@@ -70,7 +70,7 @@
         "precio": 100,
         "descripcion": "Nintendo",
         "categoria": "Consolas",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 10,
@@ -78,7 +78,7 @@
         "precio": 100,
         "descripcion": "Nintendo Switch",
         "categoria": "Consolas",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 11,
@@ -86,7 +86,7 @@
         "precio": 100,
         "descripcion": "XBOX X Series",
         "categoria": "Consolas",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 12,
@@ -94,7 +94,7 @@
         "precio": 100,
         "descripcion": "Game Boy Color",
         "categoria": "Consolas",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 13,
@@ -102,7 +102,7 @@
         "precio": 100,
         "descripcion": "Camisa Atari",
         "categoria": "Diversos",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 14,
@@ -110,7 +110,7 @@
         "precio": 100,
         "descripcion": "Camisa SNES",
         "categoria": "Diversos",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 15,
@@ -118,7 +118,7 @@
         "precio": 100,
         "descripcion": "Munieco Sonic",
         "categoria": "Diversos",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 16,
@@ -126,7 +126,7 @@
         "precio": 100,
         "descripcion": "Reloj Rosa",
         "categoria": "Diversos",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 17,
@@ -134,7 +134,7 @@
         "precio": 100,
         "descripcion": "Gafas VR",
         "categoria": "Diversos",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       },
       {
         "id" : 18,
@@ -142,7 +142,7 @@
         "precio": 100,
         "descripcion": "Pikachu gigante",
         "categoria": "Diversos",
-        "img": "../img/productoSinImagen.jpg"
+        "img": "../img/productoSinImagen.png"
       }
     ]
   }

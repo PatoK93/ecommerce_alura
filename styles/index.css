@@ -46,6 +46,7 @@ a{
 
 .galeriaFlex{
     display: flex;
+    justify-content: space-between;
 }
 
 .paddingCard{

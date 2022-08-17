@@ -18,7 +18,6 @@
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
       crossorigin="anonymous"
     ></script>
-    <link href="./styles/index.css" rel="stylesheet" type="text/css" />
     <title>Ecommerce PAK</title>
   </head>
   <body>
@@ -124,7 +123,26 @@
       </section>
     </header>
     <main>
-      <div id="root"></div>
+      <div id="main">
+        <section id="contenedorStarWars">
+          <div class="paddingTituloGaleria">
+            <h3 class="letraNegrita">Stars Wars</h3>
+          </div>
+          <div id="galeriaStarWars" class="paddingGaleria galeriaFlex"></div>
+        </section>
+        <section id="contenedorConsolas paddingGaleria">
+          <div class="paddingTituloGaleria">
+            <h3 class="letraNegrita">Consolas</h3>
+          </div>
+          <div id="galeriaConsolas" class="paddingGaleria galeriaFlex"></div>
+        </section>
+        <section id="contenedorDiversos">
+          <div class="paddingTituloGaleria">
+            <h3 class="letraNegrita">Diversos</h3>
+          </div>
+          <div id="galeriaDiversos" class="paddingGaleria galeriaFlex"></div>
+        </section>
+      </div>
     </main>
     <footer>
       <section>
@@ -222,5 +240,6 @@
       </section>
     </footer>
     <script type="module" src="./js/index.js"></script>
+    <link href="./styles/index.css" rel="stylesheet" type="text/css" />
   </body>
 </html>
