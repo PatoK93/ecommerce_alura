@@ -68,7 +68,7 @@
                   <button type="button" class="btn btn-primary">Login</button>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Ver todo</a>
+                  <a class="nav-link" href="#" id="linkTodos">Ver todo</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a
@@ -81,28 +81,42 @@
                     Categorías
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Star Wars</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#" id="linkStarWars"
+                        >Star Wars</a
+                      >
+                    </li>
                     <li>
                       <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="#">Consolas</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#" id="linkConsolas"
+                        >Consolas</a
+                      >
+                    </li>
                     <li>
                       <hr class="dropdown-divider" />
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">Diversos</a>
+                      <a class="dropdown-item" href="#" id="linkDiversos"
+                        >Diversos</a
+                      >
                     </li>
                   </ul>
                 </li>
               </ul>
               <form class="d-flex" role="search">
                 <input
+                  id="inputBuscar"
                   class="form-control me-2"
-                  type="search"
-                  placeholder="Search"
+                  type="text"
+                  placeholder="Buscar"
                   aria-label="Search"
+                  required
                 />
-                <button class="btn btn-primary" type="submit">Search</button>
+                <button class="btn btn-primary" type="submit" id="btnBuscar">
+                  Buscar
+                </button>
               </form>
             </div>
           </div>
@@ -123,24 +137,30 @@
       </section>
     </header>
     <main>
-      <div id="main">
+      <div id="divMain">
         <section id="contenedorStarWars">
           <div class="paddingTituloGaleria">
             <h3 class="letraNegrita">Stars Wars</h3>
           </div>
-          <div id="galeriaStarWars" class="paddingGaleria galeriaFlex"></div>
+          <div class="container-fluid">
+            <div id="galeriaStarWars" class="row"></div>
+          </div>
         </section>
         <section id="contenedorConsolas paddingGaleria">
           <div class="paddingTituloGaleria">
             <h3 class="letraNegrita">Consolas</h3>
           </div>
-          <div id="galeriaConsolas" class="paddingGaleria galeriaFlex"></div>
+          <div class="container-fluid">
+            <div id="galeriaConsolas" class="row"></div>
+          </div>
         </section>
         <section id="contenedorDiversos">
           <div class="paddingTituloGaleria">
             <h3 class="letraNegrita">Diversos</h3>
           </div>
-          <div id="galeriaDiversos" class="paddingGaleria galeriaFlex"></div>
+          <div class="container-fluid">
+            <div id="galeriaDiversos" class="row"></div>
+          </div>
         </section>
       </div>
     </main>
@@ -206,7 +226,10 @@
                       required
                     ></textarea>
                   </div>
-                  <button type="button" class="btn btn-primary white">
+                  <button
+                    type="submit"
+                    class="btn btn-primary white paddingBotonEnviar"
+                  >
                     Enviar
                   </button>
                 </form>

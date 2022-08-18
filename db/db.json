@@ -2,7 +2,7 @@
     "productos": [
       {
         "id" : 1,
-        "nombre": "Cabeza stormtrooper blanca",
+        "nombre": "Cabeza stormtrooper",
         "precio": 100,
         "descripcion": "Cabeza stormtrooper blanca",
         "categoria": "Star Wars",
@@ -10,7 +10,7 @@
       },
       {
         "id" : 2,
-        "nombre": "Cabeza darthvader negra",
+        "nombre": "Cabeza darthvader",
         "precio": 100,
         "descripcion": "Cabeza darthvader negra",
         "categoria": "Star Wars",
