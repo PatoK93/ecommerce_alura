@@ -1,18 +1,23 @@
-import { dbServices } from "../services/dbServices.js";
+import { dbServices } from "./services/dbServices.js";
 
 //constantes y variables
 
-let divMain = document.getElementById("divMain");
-let divGaleriaStarWars = document.getElementById("galeriaStarWars");
-let divGaleriaConsolas = document.getElementById("galeriaConsolas");
-let divGaleriaDiversos = document.getElementById("galeriaDiversos");
-
+let btnLogin = document.getElementById("btnLogin");
 let linkTodos = document.getElementById("linkTodos");
 let linkStarWars = document.getElementById("linkStarWars");
 let linkConsolas = document.getElementById("linkConsolas");
 let linkDiversos = document.getElementById("linkDiversos");
 let inputBuscar = document.getElementById("inputBuscar");
 let btnBuscar = document.getElementById("btnBuscar");
+
+let divMain = document.getElementById("divMain");
+let divGaleriaStarWars = document.getElementById("galeriaStarWars");
+let divGaleriaConsolas = document.getElementById("galeriaConsolas");
+let divGaleriaDiversos = document.getElementById("galeriaDiversos");
+
+let inputNyA = document.getElementById("inputNyA");
+let mensajeParaEnviar = document.getElementById("mensajeParaEnviar");
+let btnEnviar = document.getElementById("btnEnviar");
 
 //funciones
 
@@ -45,7 +50,7 @@ linkTodos.addEventListener("click", () => {
 <div class="container-fluid">
   <div id="galeriaDiversos" class="row"></div>
 </div>
-</section>;
+</section>
 `;
 
   divMain.innerHTML = contenedor;
@@ -131,7 +136,7 @@ linkStarWars.addEventListener("click", () => {
     <div class="container-fluid">
       <div id="galeriaStarWars" class="row"></div>
     </div>
-  </section>;
+  </section>
 `;
 
   divMain.innerHTML = contenedor;
@@ -153,7 +158,7 @@ linkStarWars.addEventListener("click", () => {
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary">Ver producto</a>
+                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
               </div>
           </div>
       `;
@@ -199,7 +204,7 @@ linkConsolas.addEventListener("click", () => {
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary">Ver producto</a>
+                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
               </div>
           </div>
       `;
@@ -245,7 +250,7 @@ linkDiversos.addEventListener("click", () => {
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary">Ver producto</a>
+                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
               </div>
           </div>
       `;
@@ -301,7 +306,7 @@ btnBuscar.addEventListener("click", () => {
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary">Ver producto</a>
+                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
               </div>
           </div>
       `;
@@ -315,6 +320,63 @@ btnBuscar.addEventListener("click", () => {
       alert("Ocurrió un error al buscar los productos solicitados");
       console.log(error);
     });
+});
+
+btnEnviar.addEventListener("click", (e) => {
+  e.preventDefault();
+  inputNyA.value = "";
+  mensajeParaEnviar.value = "";
+});
+
+btnLogin.addEventListener("click", () => {
+  divMain.innerHTML = "";
+
+  divMain.innerHTML = `
+  <form action="" class="formLogin">
+  <h2>Iniciar Sesión</h2>
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <label class="form-label" for="email"
+      >Escriba su correo electrónico</label
+    >
+    <input
+      type="email"
+      id="email"
+      class="form-control inputWidth"
+      required
+    />
+  </div>
+  <!-- Password input -->
+  <div class="form-outline mb-4">
+    <label class="form-label" for="password">Escriba su contraseña</label>
+    <input
+      type="password"
+      id="password"
+      class="form-control inputWidth"
+      required
+    />
+  </div>
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4" id="btnAdmin">
+    Entrar
+  </button>
+</form>
+`;
+
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+  let btnAdmin = document.getElementById("btnAdmin");
+
+  btnAdmin.addEventListener("click", () => {
+    if (email.value == "admin@admin.com" && password.value == "admin") {
+      btnLogin.innerText = "Logout";
+      btnLogin.classList.remove("btn-primary");
+      btnLogin.classList.add("btn-danger");
+      divMain.innerHTML = "";
+    } else {
+      alert("Credenciales incorrectas!");
+    }
+  });
 });
 
 //flujo
@@ -335,7 +397,7 @@ dbServices
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary">Ver producto</a>
+                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
               </div>
           </div>
       `;
@@ -353,7 +415,7 @@ dbServices
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary">Ver producto</a>
+                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
               </div>
           </div>
       </div>
@@ -372,7 +434,7 @@ dbServices
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary">Ver producto</a>
+                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
               </div>
           </div>
       </div>

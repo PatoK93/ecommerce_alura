@@ -1,81 +1,96 @@
-.logo{
-    display: flex;
+.logo {
+  display: flex;
 }
 
 .centerLogin {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-.backgroundImage{
-    background-image: url('../img/banner.png');
-    width: 100%;
-    height: 480px;
-    margin: auto;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.backgroundImage {
+  background-image: url("../img/banner.png");
+  width: 100%;
+  height: 480px;
+  margin: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.white{
-    color: white;
+.white {
+  color: white;
 }
 
-.promo{
-    padding-top: 200px;
-    padding-left: 70px;
+.promo {
+  padding-top: 200px;
+  padding-left: 70px;
 }
 
-.letraGrande{
-    font-size: 40px;
+.letraGrande {
+  font-size: 40px;
 }
 
-.letraNegrita{
-    font-weight: bold;
+.letraNegrita {
+  font-weight: bold;
 }
 
-.paddingGaleria{
-    padding-top: 40px;
-    padding-left: 40px;
+.paddingGaleria {
+  padding-top: 40px;
+  padding-left: 40px;
 }
 
-.galeriaFlex{
-    display: flex;
-    justify-content: space-between;
+.galeriaFlex {
+  display: flex;
+  justify-content: space-between;
 }
 
-.paddingCard{
-    padding-bottom: 50px;
+.paddingCard {
+  padding-bottom: 50px;
 }
 
-.paddingTituloGaleria{
-    padding-top: 20px;
-    padding-left: 20px;
+.paddingTituloGaleria {
+  padding-top: 20px;
+  padding-left: 20px;
 }
 
-.centerFooter{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.centerFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.paddingFooter{
-    padding-top: 20px;
+.paddingFooter {
+  padding-top: 20px;
 }
 
-.black{
-    color: black;
+.black {
+  color: black;
 }
 
-.centerDevelopBy{
-    text-align: center;
+.centerDevelopBy {
+  text-align: center;
 }
 
-.paddingBotonEnviar{
-    margin-bottom: 20px;
+.paddingBotonEnviar {
+  margin-bottom: 20px;
+}
+
+.anchorVerConsolas {
+  color: white;
+  text-decoration: none;
+}
+
+.formLogin {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

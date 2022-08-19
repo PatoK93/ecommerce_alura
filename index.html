@@ -65,7 +65,9 @@
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item centerLogin">
-                  <button type="button" class="btn btn-primary">Login</button>
+                  <button type="button" class="btn btn-primary" id="btnLogin">
+                    Login
+                  </button>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#" id="linkTodos">Ver todo</a>
@@ -129,8 +131,14 @@
             <p class="white letraNegrita">
               Productos seleccionados con 33% de descuento
             </p>
-            <button type="button" class="btn btn-primary white">
-              Ver Consolas
+            <button
+              type="submit"
+              class="btn btn-primary white"
+              href="#contenedorConsolas"
+            >
+              <a href="#contenedorConsolas" class="anchorVerConsolas"
+                >Ver Consolas</a
+              >
             </button>
           </div>
         </div>
@@ -146,7 +154,7 @@
             <div id="galeriaStarWars" class="row"></div>
           </div>
         </section>
-        <section id="contenedorConsolas paddingGaleria">
+        <section id="contenedorConsolas">
           <div class="paddingTituloGaleria">
             <h3 class="letraNegrita">Consolas</h3>
           </div>
@@ -206,9 +214,10 @@
                     <input
                       type="text"
                       class="form-control"
-                      id="exampleFormControlInput1"
+                      id="inputNyA"
                       placeholder="Ingrese su nombre y apellido"
                       required
+                      maxlength="40"
                     />
                   </div>
                   <div class="mb-3">
@@ -219,16 +228,18 @@
                     >
                     <textarea
                       class="form-control"
-                      id="exampleFormControlTextarea1"
+                      id="mensajeParaEnviar"
                       rows="5"
                       cols="40"
                       placeholder="Escribe tu mensaje"
                       required
+                      maxlength="120"
                     ></textarea>
                   </div>
                   <button
                     type="submit"
                     class="btn btn-primary white paddingBotonEnviar"
+                    id="btnEnviar"
                   >
                     Enviar
                   </button>
