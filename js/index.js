@@ -15,6 +15,8 @@ let divGaleriaStarWars = document.getElementById("galeriaStarWars");
 let divGaleriaConsolas = document.getElementById("galeriaConsolas");
 let divGaleriaDiversos = document.getElementById("galeriaDiversos");
 
+let divProducto = document.getElementById("divProductos");
+
 let inputNyA = document.getElementById("inputNyA");
 let mensajeParaEnviar = document.getElementById("mensajeParaEnviar");
 let btnEnviar = document.getElementById("btnEnviar");
@@ -370,9 +372,21 @@ btnLogin.addEventListener("click", () => {
   btnAdmin.addEventListener("click", () => {
     if (email.value == "admin@admin.com" && password.value == "admin") {
       btnLogin.innerText = "Logout";
+      btnLogin.setAttribute("id", "btnLogout");
       btnLogin.classList.remove("btn-primary");
       btnLogin.classList.add("btn-danger");
       divMain.innerHTML = "";
+
+      let btnLogout = document.getElementById("btnLogout");
+
+      btnLogout.addEventListener("click", () => {
+        btnLogin.innerText = "Login";
+        btnLogin.setAttribute("id", "btnLogout");
+        btnLogin.classList.remove("btn-danger");
+        btnLogin.classList.add("btn-primary");
+        btnLogin.setAttribute("id", "btnLogin");
+        divMain.innerHTML = "";
+      });
     } else {
       alert("Credenciales incorrectas!");
     }
@@ -397,7 +411,7 @@ dbServices
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
+                  <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
               </div>
           </div>
       `;
@@ -415,7 +429,7 @@ dbServices
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
+                  <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
               </div>
           </div>
       </div>
@@ -434,7 +448,7 @@ dbServices
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
                   <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
+                  <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
               </div>
           </div>
       </div>
@@ -446,3 +460,9 @@ dbServices
     alert("Ocurrió un error al traer los productos");
     console.log(error);
   });
+
+divProducto.addEventListener("click", (e) => {
+  if (e.target.classList.contains("verDetalle")) {
+    console.log(e.target.getAttribute("id"));
+  }
+});
