@@ -20,7 +20,7 @@ const eliminarProducto = (id) => {
 };
 
 const detalleProdcuto = (id) => {
-  return fetch(`http://localhost:3000/producto/${id}`).then((respuesta) =>
+  return fetch(`http://localhost:3000/productos/${id}`).then((respuesta) =>
     respuesta.json()
   );
 };

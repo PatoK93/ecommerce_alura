@@ -94,3 +94,13 @@ a {
   justify-content: center;
   align-items: center;
 }
+
+.centradoVerticalDetalle {
+  display: flex;
+  align-items: center;
+}
+
+.btnVolverCentrado {
+  display: flex;
+  justify-content: center;
+}
