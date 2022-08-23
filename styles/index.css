@@ -104,3 +104,13 @@ a {
   display: flex;
   justify-content: center;
 }
+
+.tamanioEditarEliminar {
+  height: 30px;
+  width: 80px;
+  font-size: small;
+}
+
+.divBtnAgregarProducto {
+  display: none;
+}

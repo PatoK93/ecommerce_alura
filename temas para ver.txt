@@ -1,0 +1,5 @@
+1- Ver de evitar un login ciclico.
+2- Refactorizar todo para que sea por componentes ya que se repite mucho codigo (plantillas en un archivo, services, controlles, etc.).
+3- Se podria ver titulos innecesarios cuando no articulos de alguna categoria (posiblemente otros problemas).
+4- Agregar sweet alert?
+5- Ver porque se recarga la pagina al hacer una peticion de tipo delete. Parece que es un comportamiento por defecto de Json-Server.

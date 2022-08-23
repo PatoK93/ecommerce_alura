@@ -2,6 +2,7 @@ import { dbServices } from "./services/dbServices.js";
 
 //constantes y variables
 
+let divBtnAgregarProducto = document.getElementById("divBtnAgregarProducto");
 let btnLogin = document.getElementById("btnLogin");
 let linkTodos = document.getElementById("linkTodos");
 let linkStarWars = document.getElementById("linkStarWars");
@@ -21,13 +22,16 @@ let inputNyA = document.getElementById("inputNyA");
 let mensajeParaEnviar = document.getElementById("mensajeParaEnviar");
 let btnEnviar = document.getElementById("btnEnviar");
 
+let esAdmin = false;
+
 //funciones
 
 //eventos
 
 linkIndex.addEventListener("click", () => {
-  divProducto.innerHTML = "";
-  divProducto.innerHTML += `
+  if (esAdmin) {
+    divProducto.innerHTML = "";
+    divProducto.innerHTML += `
 <section id="contenedorStarWars">
 <div class="paddingTituloGaleria">
   <h3 class="letraNegrita">Stars Wars</h3>
@@ -54,16 +58,16 @@ linkIndex.addEventListener("click", () => {
 </section>
 `;
 
-  let divGaleriaStarWarsVolver = document.getElementById("galeriaStarWars");
-  let divGaleriaConsolasVolver = document.getElementById("galeriaConsolas");
-  let divGaleriaDiversosVolver = document.getElementById("galeriaDiversos");
+    let divGaleriaStarWarsVolver = document.getElementById("galeriaStarWars");
+    let divGaleriaConsolasVolver = document.getElementById("galeriaConsolas");
+    let divGaleriaDiversosVolver = document.getElementById("galeriaDiversos");
 
-  dbServices
-    .listarProductos()
-    .then((data) => {
-      data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
-        if (categoria == "Star Wars") {
-          divGaleriaStarWarsVolver.innerHTML += `
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Star Wars") {
+            divGaleriaStarWarsVolver.innerHTML += `
     <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
         <div class="card" style="width: 15rem">
             <img
@@ -74,13 +78,17 @@ linkIndex.addEventListener("click", () => {
         <div class="card-body">
             <h5 class="card-title">${nombre}</h5>
             <p class="card-text">${precio}</p>
-            <a class="btn btn-primary verDetalle" id=${id}>Ver producto</a>
+            <div class="galeriaFlex">
+            <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+            <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+            <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+          </div>
         </div>
     </div>
 `;
-        }
-        if (categoria == "Consolas") {
-          divGaleriaConsolasVolver.innerHTML += `
+          }
+          if (categoria == "Consolas") {
+            divGaleriaConsolasVolver.innerHTML += `
 <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
     <div class="col paddingCard">
         <div class="card" style="width: 15rem">
@@ -92,14 +100,18 @@ linkIndex.addEventListener("click", () => {
         <div class="card-body">
             <h5 class="card-title">${nombre}</h5>
             <p class="card-text">${precio}</p>
-            <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+            <div class="galeriaFlex">
+            <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+            <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+            <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+          </div>
         </div>
     </div>
 </div>
 `;
-        }
-        if (categoria == "Diversos") {
-          divGaleriaDiversosVolver.innerHTML += `
+          }
+          if (categoria == "Diversos") {
+            divGaleriaDiversosVolver.innerHTML += `
 <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
     <div class="col paddingCard">
         <div class="card" style="width: 15rem">
@@ -111,40 +123,144 @@ linkIndex.addEventListener("click", () => {
         <div class="card-body">
             <h5 class="card-title">${nombre}</h5>
             <p class="card-text">${precio}</p>
-            <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+            <div class="galeriaFlex">
+            <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+            <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+            <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+          </div>
         </div>
     </div>
 </div>
 `;
-        }
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos");
+        console.log(error);
       });
-    })
-    .catch((error) => {
-      alert("Ocurrió un error al traer los productos");
-      console.log(error);
-    });
+  } else {
+    divProducto.innerHTML = "";
+
+    divProducto.innerHTML += `
+      <section id="contenedorStarWars">
+      <div class="paddingTituloGaleria">
+        <h3 class="letraNegrita">Stars Wars</h3>
+      </div>
+      <div class="container-fluid">
+        <div id="galeriaStarWars" class="row"></div>
+      </div>
+    </section>
+    <section id="contenedorConsolas">
+      <div class="paddingTituloGaleria">
+        <h3 class="letraNegrita">Consolas</h3>
+      </div>
+      <div class="container-fluid">
+        <div id="galeriaConsolas" class="row"></div>
+      </div>
+    </section>
+    <section id="contenedorDiversos">
+      <div class="paddingTituloGaleria">
+        <h3 class="letraNegrita">Diversos</h3>
+      </div>
+      <div class="container-fluid">
+        <div id="galeriaDiversos" class="row"></div>
+      </div>
+    </section>
+    `;
+
+    let divGaleriaStarWarsVolver = document.getElementById("galeriaStarWars");
+    let divGaleriaConsolasVolver = document.getElementById("galeriaConsolas");
+    let divGaleriaDiversosVolver = document.getElementById("galeriaDiversos");
+
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Star Wars") {
+            divGaleriaStarWarsVolver.innerHTML += `
+          <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+              <div class="card" style="width: 15rem">
+                  <img
+                  src="${img}"
+                  class="card-img-top"
+                  alt="Imágen ${categoria}"
+              />
+              <div class="card-body">
+                  <h5 class="card-title">${nombre}</h5>
+                  <p class="card-text">${precio}</p>
+                  <a class="btn btn-primary verDetalle" id=${id}>Ver Producto</a>
+              </div>
+          </div>
+      `;
+          }
+          if (categoria == "Consolas") {
+            divGaleriaConsolasVolver.innerHTML += `
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+          <div class="col paddingCard">
+              <div class="card" style="width: 15rem">
+                  <img
+                  src="${img}"
+                  class="card-img-top"
+                  alt="Imágen ${categoria}"
+              />
+              <div class="card-body">
+                  <h5 class="card-title">${nombre}</h5>
+                  <p class="card-text">${precio}</p>
+                  <a class="btn btn-primary verDetalle" id=${id}>Ver Producto</a>
+              </div>
+          </div>
+      </div>
+    `;
+          }
+          if (categoria == "Diversos") {
+            divGaleriaDiversosVolver.innerHTML += `
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+          <div class="col paddingCard">
+              <div class="card" style="width: 15rem">
+                  <img
+                  src="${img}"
+                  class="card-img-top"
+                  alt="Imágen ${categoria}"
+              />
+              <div class="card-body">
+                  <h5 class="card-title">${nombre}</h5>
+                  <p class="card-text">${precio}</p>
+                  <a class="btn btn-primary verDetalle" id=${id}>Ver Producto</a>
+              </div>
+          </div>
+      </div>
+      `;
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos");
+        console.log(error);
+      });
+  }
 });
 
 linkTodos.addEventListener("click", () => {
-  divMain.innerHTML = "";
-
-  let contenedor = `
-  <section id="contenedorStarWars">
-    <div class="paddingTituloGaleria">
-      <h3 class="letraNegrita">Stars Wars</h3>
-    </div>
-    <div class="container-fluid">
-      <div id="galeriaStarWars" class="row"></div>
-    </div>
-  </section>;
-  <section id="contenedorConsolas">
-  <div class="paddingTituloGaleria">
-    <h3 class="letraNegrita">Consolas</h3>
-  </div>
-  <div class="container-fluid">
-    <div id="galeriaConsolas" class="row"></div>
-  </div>
-</section>;
+  if (esAdmin) {
+    divProducto.innerHTML = "";
+    divProducto.innerHTML += `
+<section id="contenedorStarWars">
+<div class="paddingTituloGaleria">
+  <h3 class="letraNegrita">Stars Wars</h3>
+</div>
+<div class="container-fluid">
+  <div id="galeriaStarWars" class="row"></div>
+</div>
+</section>
+<section id="contenedorConsolas">
+<div class="paddingTituloGaleria">
+  <h3 class="letraNegrita">Consolas</h3>
+</div>
+<div class="container-fluid">
+  <div id="galeriaConsolas" class="row"></div>
+</div>
+</section>
 <section id="contenedorDiversos">
 <div class="paddingTituloGaleria">
   <h3 class="letraNegrita">Diversos</h3>
@@ -155,174 +271,107 @@ linkTodos.addEventListener("click", () => {
 </section>
 `;
 
-  divMain.innerHTML = contenedor;
-  let divGaleriaStarWarsFiltrado = document.getElementById("galeriaStarWars");
-  let divGaleriaConsolasFiltrado = document.getElementById("galeriaConsolas");
-  let divGaleriaDiversosFiltrado = document.getElementById("galeriaDiversos");
+    let divGaleriaStarWarsVolver = document.getElementById("galeriaStarWars");
+    let divGaleriaConsolasVolver = document.getElementById("galeriaConsolas");
+    let divGaleriaDiversosVolver = document.getElementById("galeriaDiversos");
 
-  dbServices
-    .listarProductos()
-    .then((data) => {
-      data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
-        if (categoria == "Star Wars") {
-          divGaleriaStarWarsFiltrado.innerHTML += `
-          <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-              <div class="card" style="width: 15rem">
-                  <img
-                  src="${img}"
-                  class="card-img-top"
-                  alt="Imágen ${categoria}"
-              />
-              <div class="card-body">
-                  <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
-              </div>
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Star Wars") {
+            divGaleriaStarWarsVolver.innerHTML += `
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+        <div class="card" style="width: 15rem">
+            <img
+            src="${img}"
+            class="card-img-top"
+            alt="Imágen ${categoria}"
+        />
+        <div class="card-body">
+            <h5 class="card-title">${nombre}</h5>
+            <p class="card-text">${precio}</p>
+            <div class="galeriaFlex">
+            <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+            <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+            <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
           </div>
-      `;
-        }
-        if (categoria == "Consolas") {
-          divGaleriaConsolasFiltrado.innerHTML += `
-      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-          <div class="col paddingCard">
-              <div class="card" style="width: 15rem">
-                  <img
-                  src="${img}"
-                  class="card-img-top"
-                  alt="Imágen ${categoria}"
-              />
-              <div class="card-body">
-                  <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
-              </div>
+        </div>
+    </div>
+`;
+          }
+          if (categoria == "Consolas") {
+            divGaleriaConsolasVolver.innerHTML += `
+<div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+    <div class="col paddingCard">
+        <div class="card" style="width: 15rem">
+            <img
+            src="${img}"
+            class="card-img-top"
+            alt="Imágen ${categoria}"
+        />
+        <div class="card-body">
+            <h5 class="card-title">${nombre}</h5>
+            <p class="card-text">${precio}</p>
+            <div class="galeriaFlex">
+            <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+            <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+            <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
           </div>
-      </div>
-  `;
-        }
-        if (categoria == "Diversos") {
-          divGaleriaDiversosFiltrado.innerHTML += `
-      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-          <div class="col paddingCard">
-              <div class="card" style="width: 15rem">
-                  <img
-                  src="${img}"
-                  class="card-img-top"
-                  alt="Imágen ${categoria}"
-              />
-              <div class="card-body">
-                  <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
-              </div>
+        </div>
+    </div>
+</div>
+`;
+          }
+          if (categoria == "Diversos") {
+            divGaleriaDiversosVolver.innerHTML += `
+<div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+    <div class="col paddingCard">
+        <div class="card" style="width: 15rem">
+            <img
+            src="${img}"
+            class="card-img-top"
+            alt="Imágen ${categoria}"
+        />
+        <div class="card-body">
+            <h5 class="card-title">${nombre}</h5>
+            <p class="card-text">${precio}</p>
+            <div class="galeriaFlex">
+            <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+            <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+            <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
           </div>
-      </div>
-      `;
-        }
+        </div>
+    </div>
+</div>
+`;
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos");
+        console.log(error);
       });
-    })
-    .catch((error) => {
-      alert("Ocurrió un error al traer los productos");
-      console.log(error);
-    });
-});
+  } else {
+    divProducto.innerHTML = "";
 
-linkStarWars.addEventListener("click", () => {
-  divMain.innerHTML = "";
-
-  let contenedor = `
-  <section id="contenedorStarWars">
+    let contenedor = `
+    <section id="contenedorStarWars">
+      <div class="paddingTituloGaleria">
+        <h3 class="letraNegrita">Stars Wars</h3>
+      </div>
+      <div class="container-fluid">
+        <div id="galeriaStarWars" class="row"></div>
+      </div>
+    </section>;
+    <section id="contenedorConsolas">
     <div class="paddingTituloGaleria">
-      <h3 class="letraNegrita">Stars Wars</h3>
+      <h3 class="letraNegrita">Consolas</h3>
     </div>
     <div class="container-fluid">
-      <div id="galeriaStarWars" class="row"></div>
+      <div id="galeriaConsolas" class="row"></div>
     </div>
-  </section>
-`;
-
-  divMain.innerHTML = contenedor;
-  let divGaleriaStarWarsFiltrado = document.getElementById("galeriaStarWars");
-
-  dbServices
-    .listarProductos()
-    .then((data) => {
-      data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
-        if (categoria == "Star Wars") {
-          divGaleriaStarWarsFiltrado.innerHTML += `
-          <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-              <div class="card" style="width: 15rem">
-                  <img
-                  src="${img}"
-                  class="card-img-top"
-                  alt="Imágen ${categoria}"
-              />
-              <div class="card-body">
-                  <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
-              </div>
-          </div>
-      `;
-        }
-      });
-    })
-    .catch((error) => {
-      alert("Ocurrió un error al traer los productos de Star Wars");
-      console.log(error);
-    });
-});
-
-linkConsolas.addEventListener("click", () => {
-  divMain.innerHTML = "";
-
-  let contenedor = `
-  <section id="contenedorConsolas paddingGaleria">
-  <div class="paddingTituloGaleria">
-    <h3 class="letraNegrita">Consolas</h3>
-  </div>
-  <div class="container-fluid">
-    <div id="galeriaConsolas" class="row"></div>
-  </div>
-</section>
-`;
-
-  divMain.innerHTML = contenedor;
-  let divGaleriaConsolasFiltrado = document.getElementById("galeriaConsolas");
-
-  dbServices
-    .listarProductos()
-    .then((data) => {
-      data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
-        if (categoria == "Consolas") {
-          divGaleriaConsolasFiltrado.innerHTML += `
-          <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-              <div class="card" style="width: 15rem">
-                  <img
-                  src="${img}"
-                  class="card-img-top"
-                  alt="Imágen ${categoria}"
-              />
-              <div class="card-body">
-                  <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
-              </div>
-          </div>
-      `;
-        }
-      });
-    })
-    .catch((error) => {
-      alert("Ocurrió un error al traer los productos de Consolas");
-      console.log(error);
-    });
-});
-
-linkDiversos.addEventListener("click", () => {
-  divMain.innerHTML = "";
-
-  let contenedor = `
+  </section>;
   <section id="contenedorDiversos">
   <div class="paddingTituloGaleria">
     <h3 class="letraNegrita">Diversos</h3>
@@ -330,98 +379,498 @@ linkDiversos.addEventListener("click", () => {
   <div class="container-fluid">
     <div id="galeriaDiversos" class="row"></div>
   </div>
-</section>
-`;
+  </section>
+  `;
 
-  divMain.innerHTML = contenedor;
-  let divGaleriaDiversosFiltrado = document.getElementById("galeriaDiversos");
+    divProducto.innerHTML = contenedor;
+    let divGaleriaStarWarsFiltrado = document.getElementById("galeriaStarWars");
+    let divGaleriaConsolasFiltrado = document.getElementById("galeriaConsolas");
+    let divGaleriaDiversosFiltrado = document.getElementById("galeriaDiversos");
 
-  dbServices
-    .listarProductos()
-    .then((data) => {
-      data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
-        if (categoria == "Diversos") {
-          divGaleriaDiversosFiltrado.innerHTML += `
-          <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-              <div class="card" style="width: 15rem">
-                  <img
-                  src="${img}"
-                  class="card-img-top"
-                  alt="Imágen ${categoria}"
-              />
-              <div class="card-body">
-                  <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
-              </div>
-          </div>
-      `;
-        }
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Star Wars") {
+            divGaleriaStarWarsFiltrado.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+                </div>
+            </div>
+        `;
+          }
+          if (categoria == "Consolas") {
+            divGaleriaConsolasFiltrado.innerHTML += `
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+            <div class="col paddingCard">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+                </div>
+            </div>
+        </div>
+    `;
+          }
+          if (categoria == "Diversos") {
+            divGaleriaDiversosFiltrado.innerHTML += `
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+            <div class="col paddingCard">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+                </div>
+            </div>
+        </div>
+        `;
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos");
+        console.log(error);
       });
-    })
-    .catch((error) => {
-      alert("Ocurrió un error al traer los productos de Diversos");
-      console.log(error);
-    });
+  }
+});
+
+linkStarWars.addEventListener("click", () => {
+  if (esAdmin) {
+    divProducto.innerHTML = "";
+
+    let contenedor = `
+    <section id="contenedorStarWars">
+      <div class="paddingTituloGaleria">
+        <h3 class="letraNegrita">Stars Wars</h3>
+      </div>
+      <div class="container-fluid">
+        <div id="galeriaStarWars" class="row"></div>
+      </div>
+    </section>
+  `;
+
+    divProducto.innerHTML = contenedor;
+    let divGaleriaStarWarsFiltrado = document.getElementById("galeriaStarWars");
+
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Star Wars") {
+            divGaleriaStarWarsFiltrado.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <div class="galeriaFlex">
+                      <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                      <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                      <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+                    </div>
+                </div>
+            </div>
+        `;
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos de Star Wars");
+        console.log(error);
+      });
+  } else {
+    divProducto.innerHTML = "";
+
+    let contenedor = `
+    <section id="contenedorStarWars">
+      <div class="paddingTituloGaleria">
+        <h3 class="letraNegrita">Stars Wars</h3>
+      </div>
+      <div class="container-fluid">
+        <div id="galeriaStarWars" class="row"></div>
+      </div>
+    </section>
+  `;
+
+    divProducto.innerHTML = contenedor;
+    let divGaleriaStarWarsFiltrado = document.getElementById("galeriaStarWars");
+
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Star Wars") {
+            divGaleriaStarWarsFiltrado.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+                </div>
+            </div>
+        `;
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos de Star Wars");
+        console.log(error);
+      });
+  }
+});
+
+linkConsolas.addEventListener("click", () => {
+  if (esAdmin) {
+    divProducto.innerHTML = "";
+
+    let contenedor = `
+    <section id="contenedorConsolas paddingGaleria">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Consolas</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaConsolas" class="row"></div>
+    </div>
+  </section>
+  `;
+
+    divProducto.innerHTML = contenedor;
+    let divGaleriaConsolasFiltrado = document.getElementById("galeriaConsolas");
+
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Consolas") {
+            divGaleriaConsolasFiltrado.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <div class="galeriaFlex">
+                      <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                      <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                      <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+                    </div>
+                </div>
+            </div>
+        `;
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos de Consolas");
+        console.log(error);
+      });
+  } else {
+    divProducto.innerHTML = "";
+
+    let contenedor = `
+    <section id="contenedorConsolas paddingGaleria">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Consolas</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaConsolas" class="row"></div>
+    </div>
+  </section>
+  `;
+
+    divProducto.innerHTML = contenedor;
+    let divGaleriaConsolasFiltrado = document.getElementById("galeriaConsolas");
+
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Consolas") {
+            divGaleriaConsolasFiltrado.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+                </div>
+            </div>
+        `;
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos de Consolas");
+        console.log(error);
+      });
+  }
+});
+
+linkDiversos.addEventListener("click", () => {
+  if (esAdmin) {
+    divProducto.innerHTML = "";
+
+    let contenedor = `
+    <section id="contenedorDiversos">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Diversos</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaDiversos" class="row"></div>
+    </div>
+  </section>
+  `;
+
+    divProducto.innerHTML = contenedor;
+    let divGaleriaDiversosFiltrado = document.getElementById("galeriaDiversos");
+
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Diversos") {
+            divGaleriaDiversosFiltrado.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <div class="galeriaFlex">
+                      <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                      <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                      <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+                    </div>
+                </div>
+            </div>
+        `;
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos de Diversos");
+        console.log(error);
+      });
+  } else {
+    divProducto.innerHTML = "";
+
+    let contenedor = `
+    <section id="contenedorDiversos">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Diversos</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaDiversos" class="row"></div>
+    </div>
+  </section>
+  `;
+
+    divProducto.innerHTML = contenedor;
+    let divGaleriaDiversosFiltrado = document.getElementById("galeriaDiversos");
+
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (categoria == "Diversos") {
+            divGaleriaDiversosFiltrado.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+                </div>
+            </div>
+        `;
+          }
+        });
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer los productos de Diversos");
+        console.log(error);
+      });
+  }
 });
 
 btnBuscar.addEventListener("click", () => {
-  let existenArticulos = false;
+  if (esAdmin) {
+    let existenArticulos = false;
 
-  dbServices
-    .listarProductos()
-    .then((data) => {
-      data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
-        if (nombre.toLowerCase().includes(inputBuscar.value.toLowerCase())) {
-          existenArticulos = true;
-        }
-      });
-
-      if (existenArticulos) {
-        divMain.innerHTML = "";
-
-        let contenedor = `
-        <section id="contenedorEncontrados">
-        <div class="paddingTituloGaleria">
-          <h3 class="letraNegrita">Productos Encontrados</h3>
-        </div>
-        <div class="container-fluid">
-          <div id="galeriaEncontrados" class="row"></div>
-        </div>
-      </section>
-      `;
-
-        divMain.innerHTML = contenedor;
-        let divGaleriaEncontrados =
-          document.getElementById("galeriaEncontrados");
-
+    dbServices
+      .listarProductos()
+      .then((data) => {
         data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
           if (nombre.toLowerCase().includes(inputBuscar.value.toLowerCase())) {
-            divGaleriaEncontrados.innerHTML += `
-          <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-              <div class="card" style="width: 15rem">
-                  <img
-                  src="${img}"
-                  class="card-img-top"
-                  alt="Imágen ${categoria}"
-              />
-              <div class="card-body">
-                  <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
-                  <a href="#" class="btn btn-primary" id="${id}">Ver producto</a>
-              </div>
-          </div>
-      `;
+            existenArticulos = true;
           }
         });
-      } else {
-        alert("No se encontraron artículos para la búsqueda solicitada!");
-      }
-    })
-    .catch((error) => {
-      alert("Ocurrió un error al buscar los productos solicitados");
-      console.log(error);
-    });
+
+        if (existenArticulos) {
+          divProducto.innerHTML = "";
+
+          let contenedor = `
+          <section id="contenedorEncontrados">
+          <div class="paddingTituloGaleria">
+            <h3 class="letraNegrita">Productos Encontrados</h3>
+          </div>
+          <div class="container-fluid">
+            <div id="galeriaEncontrados" class="row"></div>
+          </div>
+        </section>
+        `;
+
+          divProducto.innerHTML = contenedor;
+          let divGaleriaEncontrados =
+            document.getElementById("galeriaEncontrados");
+
+          data.forEach(
+            ({ id, nombre, precio, descripcion, categoria, img }) => {
+              if (
+                nombre.toLowerCase().includes(inputBuscar.value.toLowerCase())
+              ) {
+                divGaleriaEncontrados.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <div class="galeriaFlex">
+                      <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                      <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                      <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+                    </div>
+                </div>
+            </div>
+        `;
+              }
+            }
+          );
+        } else {
+          alert("No se encontraron artículos para la búsqueda solicitada!");
+        }
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al buscar los productos solicitados");
+        console.log(error);
+      });
+  } else {
+    let existenArticulos = false;
+
+    dbServices
+      .listarProductos()
+      .then((data) => {
+        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
+          if (nombre.toLowerCase().includes(inputBuscar.value.toLowerCase())) {
+            existenArticulos = true;
+          }
+        });
+
+        if (existenArticulos) {
+          divProducto.innerHTML = "";
+
+          let contenedor = `
+          <section id="contenedorEncontrados">
+          <div class="paddingTituloGaleria">
+            <h3 class="letraNegrita">Productos Encontrados</h3>
+          </div>
+          <div class="container-fluid">
+            <div id="galeriaEncontrados" class="row"></div>
+          </div>
+        </section>
+        `;
+
+          divProducto.innerHTML = contenedor;
+          let divGaleriaEncontrados =
+            document.getElementById("galeriaEncontrados");
+
+          data.forEach(
+            ({ id, nombre, precio, descripcion, categoria, img }) => {
+              if (
+                nombre.toLowerCase().includes(inputBuscar.value.toLowerCase())
+              ) {
+                divGaleriaEncontrados.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+                </div>
+            </div>
+        `;
+              }
+            }
+          );
+        } else {
+          alert("No se encontraron artículos para la búsqueda solicitada!");
+        }
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al buscar los productos solicitados");
+        console.log(error);
+      });
+  }
 });
 
 btnEnviar.addEventListener("click", (e) => {
@@ -431,9 +880,9 @@ btnEnviar.addEventListener("click", (e) => {
 });
 
 btnLogin.addEventListener("click", () => {
-  divMain.innerHTML = "";
+  divProducto.innerHTML = "";
 
-  divMain.innerHTML = `
+  divProducto.innerHTML = `
   <form action="" class="formLogin">
   <h2>Iniciar Sesión</h2>
   <!-- Email input -->
@@ -471,21 +920,237 @@ btnLogin.addEventListener("click", () => {
 
   btnAdmin.addEventListener("click", () => {
     if (email.value == "admin@admin.com" && password.value == "admin") {
+      divBtnAgregarProducto.classList.remove("divBtnAgregarProducto");
+      esAdmin = true;
       btnLogin.innerText = "Logout";
       btnLogin.setAttribute("id", "btnLogout");
       btnLogin.classList.remove("btn-primary");
       btnLogin.classList.add("btn-danger");
-      divMain.innerHTML = "";
+      divProducto.innerHTML = "";
 
       let btnLogout = document.getElementById("btnLogout");
 
+      divProducto.innerHTML += `
+        <section id="contenedorStarWars">
+        <div class="paddingTituloGaleria">
+          <h3 class="letraNegrita">Stars Wars</h3>
+        </div>
+        <div class="container-fluid">
+          <div id="galeriaStarWars" class="row"></div>
+        </div>
+      </section>
+      <section id="contenedorConsolas">
+        <div class="paddingTituloGaleria">
+          <h3 class="letraNegrita">Consolas</h3>
+        </div>
+        <div class="container-fluid">
+          <div id="galeriaConsolas" class="row"></div>
+        </div>
+      </section>
+      <section id="contenedorDiversos">
+        <div class="paddingTituloGaleria">
+          <h3 class="letraNegrita">Diversos</h3>
+        </div>
+        <div class="container-fluid">
+          <div id="galeriaDiversos" class="row"></div>
+        </div>
+      </section>
+      `;
+
+      let divGaleriaStarWarsVolver = document.getElementById("galeriaStarWars");
+      let divGaleriaConsolasVolver = document.getElementById("galeriaConsolas");
+      let divGaleriaDiversosVolver = document.getElementById("galeriaDiversos");
+
+      dbServices
+        .listarProductos()
+        .then((data) => {
+          data.forEach(
+            ({ id, nombre, precio, descripcion, categoria, img }) => {
+              if (categoria == "Star Wars") {
+                divGaleriaStarWarsVolver.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <div class="galeriaFlex">
+                      <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                      <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                      <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+                    </div>
+                </div>
+            </div>
+        `;
+              }
+              if (categoria == "Consolas") {
+                divGaleriaConsolasVolver.innerHTML += `
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+            <div class="col paddingCard">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <div class="galeriaFlex">
+                      <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                      <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                      <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      `;
+              }
+              if (categoria == "Diversos") {
+                divGaleriaDiversosVolver.innerHTML += `
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+            <div class="col paddingCard">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <div class="galeriaFlex">
+                      <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                      <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                      <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+              }
+            }
+          );
+        })
+        .catch((error) => {
+          alert("Ocurrió un error al traer los productos");
+          console.log(error);
+        });
+
       btnLogout.addEventListener("click", () => {
+        divBtnAgregarProducto.classList.add("divBtnAgregarProducto");
+        esAdmin = false;
         btnLogin.innerText = "Login";
-        btnLogin.setAttribute("id", "btnLogout");
         btnLogin.classList.remove("btn-danger");
         btnLogin.classList.add("btn-primary");
         btnLogin.setAttribute("id", "btnLogin");
-        divMain.innerHTML = "";
+        divProducto.innerHTML = "";
+
+        divProducto.innerHTML += `
+        <section id="contenedorStarWars">
+        <div class="paddingTituloGaleria">
+          <h3 class="letraNegrita">Stars Wars</h3>
+        </div>
+        <div class="container-fluid">
+          <div id="galeriaStarWars" class="row"></div>
+        </div>
+      </section>
+      <section id="contenedorConsolas">
+        <div class="paddingTituloGaleria">
+          <h3 class="letraNegrita">Consolas</h3>
+        </div>
+        <div class="container-fluid">
+          <div id="galeriaConsolas" class="row"></div>
+        </div>
+      </section>
+      <section id="contenedorDiversos">
+        <div class="paddingTituloGaleria">
+          <h3 class="letraNegrita">Diversos</h3>
+        </div>
+        <div class="container-fluid">
+          <div id="galeriaDiversos" class="row"></div>
+        </div>
+      </section>
+      `;
+
+        let divGaleriaStarWarsVolver =
+          document.getElementById("galeriaStarWars");
+        let divGaleriaConsolasVolver =
+          document.getElementById("galeriaConsolas");
+        let divGaleriaDiversosVolver =
+          document.getElementById("galeriaDiversos");
+
+        dbServices
+          .listarProductos()
+          .then((data) => {
+            data.forEach(
+              ({ id, nombre, precio, descripcion, categoria, img }) => {
+                if (categoria == "Star Wars") {
+                  divGaleriaStarWarsVolver.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a class="btn btn-primary verDetalle" id=${id}>Ver producto</a>
+                </div>
+            </div>
+        `;
+                }
+                if (categoria == "Consolas") {
+                  divGaleriaConsolasVolver.innerHTML += `
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+            <div class="col paddingCard">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+                </div>
+            </div>
+        </div>
+      `;
+                }
+                if (categoria == "Diversos") {
+                  divGaleriaDiversosVolver.innerHTML += `
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+            <div class="col paddingCard">
+                <div class="card" style="width: 15rem">
+                    <img
+                    src="${img}"
+                    class="card-img-top"
+                    alt="Imágen ${categoria}"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p class="card-text">${precio}</p>
+                    <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+                </div>
+            </div>
+        </div>
+        `;
+                }
+              }
+            );
+          })
+          .catch((error) => {
+            alert("Ocurrió un error al traer los productos");
+            console.log(error);
+          });
       });
     } else {
       alert("Credenciales incorrectas!");
@@ -583,101 +1248,231 @@ divProducto.addEventListener("click", (e) => {
 
 divProducto.addEventListener("click", (e) => {
   if (e.target.classList.contains("btnVolverIndex")) {
-    divProducto.innerHTML = "";
-    divProducto.innerHTML += `
-  <section id="contenedorStarWars">
-  <div class="paddingTituloGaleria">
-    <h3 class="letraNegrita">Stars Wars</h3>
-  </div>
-  <div class="container-fluid">
-    <div id="galeriaStarWars" class="row"></div>
-  </div>
-</section>
-<section id="contenedorConsolas">
-  <div class="paddingTituloGaleria">
-    <h3 class="letraNegrita">Consolas</h3>
-  </div>
-  <div class="container-fluid">
-    <div id="galeriaConsolas" class="row"></div>
-  </div>
-</section>
-<section id="contenedorDiversos">
-  <div class="paddingTituloGaleria">
-    <h3 class="letraNegrita">Diversos</h3>
-  </div>
-  <div class="container-fluid">
-    <div id="galeriaDiversos" class="row"></div>
-  </div>
-</section>
-`;
-
-    let divGaleriaStarWarsVolver = document.getElementById("galeriaStarWars");
-    let divGaleriaConsolasVolver = document.getElementById("galeriaConsolas");
-    let divGaleriaDiversosVolver = document.getElementById("galeriaDiversos");
-
-    dbServices
-      .listarProductos()
-      .then((data) => {
-        data.forEach(({ id, nombre, precio, descripcion, categoria, img }) => {
-          if (categoria == "Star Wars") {
-            divGaleriaStarWarsVolver.innerHTML += `
-      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-          <div class="card" style="width: 15rem">
-              <img
-              src="${img}"
-              class="card-img-top"
-              alt="Imágen ${categoria}"
-          />
-          <div class="card-body">
-              <h5 class="card-title">${nombre}</h5>
-              <p class="card-text">${precio}</p>
-              <a class="btn btn-primary verDetalle" id=${id}>Ver producto</a>
-          </div>
-      </div>
+    if (esAdmin) {
+      divProducto.innerHTML = "";
+      divProducto.innerHTML += `
+    <section id="contenedorStarWars">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Stars Wars</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaStarWars" class="row"></div>
+    </div>
+  </section>
+  <section id="contenedorConsolas">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Consolas</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaConsolas" class="row"></div>
+    </div>
+  </section>
+  <section id="contenedorDiversos">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Diversos</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaDiversos" class="row"></div>
+    </div>
+  </section>
   `;
-          }
-          if (categoria == "Consolas") {
-            divGaleriaConsolasVolver.innerHTML += `
-  <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-      <div class="col paddingCard">
-          <div class="card" style="width: 15rem">
-              <img
-              src="${img}"
-              class="card-img-top"
-              alt="Imágen ${categoria}"
-          />
-          <div class="card-body">
-              <h5 class="card-title">${nombre}</h5>
-              <p class="card-text">${precio}</p>
-              <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
-          </div>
-      </div>
-  </div>
-`;
-          }
-          if (categoria == "Diversos") {
-            divGaleriaDiversosVolver.innerHTML += `
-  <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
-      <div class="col paddingCard">
-          <div class="card" style="width: 15rem">
-              <img
-              src="${img}"
-              class="card-img-top"
-              alt="Imágen ${categoria}"
-          />
-          <div class="card-body">
-              <h5 class="card-title">${nombre}</h5>
-              <p class="card-text">${precio}</p>
-              <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
-          </div>
-      </div>
-  </div>
+
+      let divGaleriaStarWarsVolver = document.getElementById("galeriaStarWars");
+      let divGaleriaConsolasVolver = document.getElementById("galeriaConsolas");
+      let divGaleriaDiversosVolver = document.getElementById("galeriaDiversos");
+
+      dbServices
+        .listarProductos()
+        .then((data) => {
+          data.forEach(
+            ({ id, nombre, precio, descripcion, categoria, img }) => {
+              if (categoria == "Star Wars") {
+                divGaleriaStarWarsVolver.innerHTML += `
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+            <div class="card" style="width: 15rem">
+                <img
+                src="${img}"
+                class="card-img-top"
+                alt="Imágen ${categoria}"
+            />
+            <div class="card-body">
+                <h5 class="card-title">${nombre}</h5>
+                <p class="card-text">${precio}</p>
+                <div class="galeriaFlex">
+                <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+              </div>
+            </div>
+        </div>
+    `;
+              }
+              if (categoria == "Consolas") {
+                divGaleriaConsolasVolver.innerHTML += `
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+        <div class="col paddingCard">
+            <div class="card" style="width: 15rem">
+                <img
+                src="${img}"
+                class="card-img-top"
+                alt="Imágen ${categoria}"
+            />
+            <div class="card-body">
+                <h5 class="card-title">${nombre}</h5>
+                <p class="card-text">${precio}</p>
+                <div class="galeriaFlex">
+                <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+              </div>
+            </div>
+        </div>
+    </div>
   `;
-          }
+              }
+              if (categoria == "Diversos") {
+                divGaleriaDiversosVolver.innerHTML += `
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+        <div class="col paddingCard">
+            <div class="card" style="width: 15rem">
+                <img
+                src="${img}"
+                class="card-img-top"
+                alt="Imágen ${categoria}"
+            />
+            <div class="card-body">
+                <h5 class="card-title">${nombre}</h5>
+                <p class="card-text">${precio}</p>
+                <div class="galeriaFlex">
+                <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
+                <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
+                <a class="btn btn-primary editarProducto tamanioEditarEliminar" id=${id}>Editar</a>
+              </div>
+            </div>
+        </div>
+    </div>
+    `;
+              }
+            }
+          );
+        })
+        .catch((error) => {
+          alert("Ocurrió un error al traer los productos");
+          console.log(error);
         });
-      })
+    } else {
+      divProducto.innerHTML = "";
+      divProducto.innerHTML += `
+    <section id="contenedorStarWars">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Stars Wars</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaStarWars" class="row"></div>
+    </div>
+  </section>
+  <section id="contenedorConsolas">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Consolas</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaConsolas" class="row"></div>
+    </div>
+  </section>
+  <section id="contenedorDiversos">
+    <div class="paddingTituloGaleria">
+      <h3 class="letraNegrita">Diversos</h3>
+    </div>
+    <div class="container-fluid">
+      <div id="galeriaDiversos" class="row"></div>
+    </div>
+  </section>
+  `;
+
+      let divGaleriaStarWarsVolver = document.getElementById("galeriaStarWars");
+      let divGaleriaConsolasVolver = document.getElementById("galeriaConsolas");
+      let divGaleriaDiversosVolver = document.getElementById("galeriaDiversos");
+
+      dbServices
+        .listarProductos()
+        .then((data) => {
+          data.forEach(
+            ({ id, nombre, precio, descripcion, categoria, img }) => {
+              if (categoria == "Star Wars") {
+                divGaleriaStarWarsVolver.innerHTML += `
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+            <div class="card" style="width: 15rem">
+                <img
+                src="${img}"
+                class="card-img-top"
+                alt="Imágen ${categoria}"
+            />
+            <div class="card-body">
+                <h5 class="card-title">${nombre}</h5>
+                <p class="card-text">${precio}</p>
+                <a class="btn btn-primary verDetalle" id=${id}>Ver producto</a>
+            </div>
+        </div>
+    `;
+              }
+              if (categoria == "Consolas") {
+                divGaleriaConsolasVolver.innerHTML += `
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+        <div class="col paddingCard">
+            <div class="card" style="width: 15rem">
+                <img
+                src="${img}"
+                class="card-img-top"
+                alt="Imágen ${categoria}"
+            />
+            <div class="card-body">
+                <h5 class="card-title">${nombre}</h5>
+                <p class="card-text">${precio}</p>
+                <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+            </div>
+        </div>
+    </div>
+  `;
+              }
+              if (categoria == "Diversos") {
+                divGaleriaDiversosVolver.innerHTML += `
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 paddingCard paddingGaleria galeriaFlex">
+        <div class="col paddingCard">
+            <div class="card" style="width: 15rem">
+                <img
+                src="${img}"
+                class="card-img-top"
+                alt="Imágen ${categoria}"
+            />
+            <div class="card-body">
+                <h5 class="card-title">${nombre}</h5>
+                <p class="card-text">${precio}</p>
+                <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
+            </div>
+        </div>
+    </div>
+    `;
+              }
+            }
+          );
+        })
+        .catch((error) => {
+          alert("Ocurrió un error al traer los productos");
+          console.log(error);
+        });
+    }
+  }
+});
+
+divProducto.addEventListener("click", (e) => {
+  if (e.target.classList.contains("eliminarProducto")) {
+    e.preventDefault();
+    let id = e.target.getAttribute("id");
+    dbServices
+      .eliminarProducto(id)
+      .then()
       .catch((error) => {
-        alert("Ocurrió un error al traer los productos");
+        alert("Ocurrió un error al eliminar el producto elegido");
         console.log(error);
       });
   }
