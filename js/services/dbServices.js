@@ -19,7 +19,7 @@ const eliminarProducto = (id) => {
   });
 };
 
-const detalleProdcuto = (id) => {
+const detalleProducto = (id) => {
   return fetch(`http://localhost:3000/productos/${id}`).then((respuesta) =>
     respuesta.json()
   );
@@ -33,7 +33,7 @@ const actualizarProducto = (
   categoria,
   img
 ) => {
-  return fetch(`http://localhost:3000/producto/${id}`, {
+  return fetch(`http://localhost:3000/productos/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -48,6 +48,6 @@ export const dbServices = {
   listarProductos,
   crearProducto,
   eliminarProducto,
-  detalleProdcuto,
+  detalleProducto,
   actualizarProducto,
 };

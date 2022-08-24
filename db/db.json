@@ -2,91 +2,99 @@
   "productos": [
     {
       "id": "4",
-      "nombre": "Stormtrooper blanco",
-      "precio": 100,
-      "descripcion": "Stormtrooper blanco",
+      "nombre": "Stormtrooper mod",
+      "precio": "200",
+      "descripcion": "Stormtrooper blanco modificado",
       "categoria": "Star Wars",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/stormtrooperBlanco.png"
     },
     {
       "id": "5",
       "nombre": "Baby Yoda",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "Baby Yoda",
       "categoria": "Star Wars",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/babyYoda.png"
     },
     {
       "id": "6",
       "nombre": "kylo Ren",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "Kylo Ren",
       "categoria": "Star Wars",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/kyloRen.png"
     },
     {
       "id": "7",
       "nombre": "mando xbox",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "mando xbox",
       "categoria": "Consolas",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/mandoXbox.png"
     },
     {
       "id": "9",
       "nombre": "Nintendo",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "Nintendo",
       "categoria": "Consolas",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/nintendo.png"
     },
     {
       "id": "10",
       "nombre": "Nintendo Switch",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "Nintendo Switch",
       "categoria": "Consolas",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/nintendoSwitch.png"
     },
     {
       "id": "12",
       "nombre": "Game Boy color",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "Game Boy Color",
       "categoria": "Consolas",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/gameboyColor.png"
     },
     {
       "id": "14",
       "nombre": "Camisa SNES",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "Camisa SNES",
       "categoria": "Diversos",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/camisaSnes.png"
     },
     {
       "id": "15",
       "nombre": "Munieco Sonic",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "Munieco Sonic",
       "categoria": "Diversos",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/sonic.png"
     },
     {
       "id": "16",
       "nombre": "Reloj Rosa",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "Reloj Rosa",
       "categoria": "Diversos",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/relojRosa.png"
     },
     {
       "id": "17",
       "nombre": "Gafas VR",
-      "precio": 100,
+      "precio": "100",
       "descripcion": "Gafas VR",
       "categoria": "Diversos",
-      "img": "../img/productoSinImagen.png"
+      "img": "../img/gafasVr.png"
+    },
+    {
+      "id": "463decf4-7b6e-42eb-a432-f4b8b350dd5a",
+      "nombre": "The Mandalorian",
+      "precio": "100",
+      "descripcion": "Foto de el mandaloriano",
+      "categoria": "Star Wars",
+      "img": "https://fueradeseries.com/wp-content/uploads/2021/05/Star-Wars-The-Mandalorian-1024x683.png"
     }
   ]
 }

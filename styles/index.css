@@ -114,3 +114,24 @@ a {
 .divBtnAgregarProducto {
   display: none;
 }
+
+.expandirFotoDetalle {
+  width: 100%;
+  height: auto;
+}
+
+.expandirFotoDetalle img {
+  width: 100%;
+  height: auto;
+}
+
+.formAgregarEditarProducto {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

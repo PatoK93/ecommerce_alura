@@ -3,6 +3,7 @@ import { dbServices } from "./services/dbServices.js";
 //constantes y variables
 
 let divBtnAgregarProducto = document.getElementById("divBtnAgregarProducto");
+let btnAgregarProducto = document.getElementById("btnAgregarProducto");
 let btnLogin = document.getElementById("btnLogin");
 let linkTodos = document.getElementById("linkTodos");
 let linkStarWars = document.getElementById("linkStarWars");
@@ -27,6 +28,129 @@ let esAdmin = false;
 //funciones
 
 //eventos
+
+btnAgregarProducto.addEventListener("click", () => {
+  divProducto.innerHTML = "";
+
+  let formAgregarProducto = `
+  <div class="formAgregarEditarProducto">
+  <form action="">
+    <h3>Agregar Nuevo Producto</h3>
+    <div class="mb-4">
+      <label for="urlImagenProducto" class="form-label"
+        >URL de la imagen</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="urlImagenProducto"
+        placeholder="Ingrese la URL de la imagen"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="categoriaProducto" class="form-label"
+        >Categoría del producto</label
+      >
+      <select name="categorias" id="categoriaProducto" title="Star Wars">
+      <option value="Star Wars">Star Wars</option>
+      <option value="Consolas">Consolas</option>
+      <option value="Diversos">Diversos</option>
+    </select>
+    </div>
+    <div class="mb-3">
+      <label for="nombreProducto" class="form-label"
+        >Nombre del producto</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="nombreProducto"
+        placeholder="Ingrese el nombre del producto"
+        required
+        maxlength="20"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="precioProducto" class="form-label"
+        >Precio del producto</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="precioProducto"
+        placeholder="Ingrese el precio del producto"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="descripcionProdcuto" class="form-label"
+        >Descripción del prodcuto</label
+      >
+      <textarea
+        class="form-control"
+        id="descripcionProdcuto"
+        rows="5"
+        cols="5"
+        required
+        maxlength="150"
+      ></textarea>
+    </div>
+    <div class="col-auto">
+      <button
+        type="button"
+        class="btn btn-primary mb-3"
+        id="btnAgregarEditarProducto"
+      >
+        Agregar Producto
+      </button>
+    </div>
+  </form>
+</div>
+  `;
+
+  divProducto.innerHTML += formAgregarProducto;
+
+  let urlImagen = document.getElementById("urlImagenProducto");
+  let categoriaProducto = document.getElementById("categoriaProducto");
+  let nombreProducto = document.getElementById("nombreProducto");
+  let precioProducto = document.getElementById("precioProducto");
+  let descripcionProdcuto = document.getElementById("descripcionProdcuto");
+  let btnAgregarEditarProducto = document.getElementById(
+    "btnAgregarEditarProducto"
+  );
+
+  btnAgregarEditarProducto.addEventListener("click", () => {
+    if (
+      urlImagen.value != "" &&
+      categoriaProducto.value != "" &&
+      nombreProducto.value != "" &&
+      precioProducto.value != "" &&
+      descripcionProdcuto.value != ""
+    ) {
+      dbServices
+        .crearProducto(
+          uuid.v4(),
+          nombreProducto.value,
+          precioProducto.value,
+          descripcionProdcuto.value,
+          categoriaProducto.value,
+          urlImagen.value
+        )
+        .then()
+        .catch((error) => {
+          alert("Ocurrió un error al crear un nuevo producto");
+          console.log(error);
+        });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Tiene que llenar todos los campos para cargar un nuevo producto!",
+      });
+    }
+  });
+});
 
 linkIndex.addEventListener("click", () => {
   if (esAdmin) {
@@ -77,7 +201,7 @@ linkIndex.addEventListener("click", () => {
         />
         <div class="card-body">
             <h5 class="card-title">${nombre}</h5>
-            <p class="card-text">${precio}</p>
+            <p class="card-text">$${precio}</p>
             <div class="galeriaFlex">
             <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
             <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -99,7 +223,7 @@ linkIndex.addEventListener("click", () => {
         />
         <div class="card-body">
             <h5 class="card-title">${nombre}</h5>
-            <p class="card-text">${precio}</p>
+            <p class="card-text">$${precio}</p>
             <div class="galeriaFlex">
             <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
             <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -122,7 +246,7 @@ linkIndex.addEventListener("click", () => {
         />
         <div class="card-body">
             <h5 class="card-title">${nombre}</h5>
-            <p class="card-text">${precio}</p>
+            <p class="card-text">$${precio}</p>
             <div class="galeriaFlex">
             <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
             <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -188,7 +312,7 @@ linkIndex.addEventListener("click", () => {
               />
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
+                  <p class="card-text">$${precio}</p>
                   <a class="btn btn-primary verDetalle" id=${id}>Ver Producto</a>
               </div>
           </div>
@@ -206,7 +330,7 @@ linkIndex.addEventListener("click", () => {
               />
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
+                  <p class="card-text">$${precio}</p>
                   <a class="btn btn-primary verDetalle" id=${id}>Ver Producto</a>
               </div>
           </div>
@@ -225,7 +349,7 @@ linkIndex.addEventListener("click", () => {
               />
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
+                  <p class="card-text">$${precio}</p>
                   <a class="btn btn-primary verDetalle" id=${id}>Ver Producto</a>
               </div>
           </div>
@@ -290,7 +414,7 @@ linkTodos.addEventListener("click", () => {
         />
         <div class="card-body">
             <h5 class="card-title">${nombre}</h5>
-            <p class="card-text">${precio}</p>
+            <p class="card-text">$${precio}</p>
             <div class="galeriaFlex">
             <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
             <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -312,7 +436,7 @@ linkTodos.addEventListener("click", () => {
         />
         <div class="card-body">
             <h5 class="card-title">${nombre}</h5>
-            <p class="card-text">${precio}</p>
+            <p class="card-text">$${precio}</p>
             <div class="galeriaFlex">
             <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
             <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -335,7 +459,7 @@ linkTodos.addEventListener("click", () => {
         />
         <div class="card-body">
             <h5 class="card-title">${nombre}</h5>
-            <p class="card-text">${precio}</p>
+            <p class="card-text">$${precio}</p>
             <div class="galeriaFlex">
             <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
             <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -402,7 +526,7 @@ linkTodos.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
                 </div>
             </div>
@@ -420,7 +544,7 @@ linkTodos.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
                 </div>
             </div>
@@ -439,7 +563,7 @@ linkTodos.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
                 </div>
             </div>
@@ -488,7 +612,7 @@ linkStarWars.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <div class="galeriaFlex">
                       <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                       <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -536,7 +660,7 @@ linkStarWars.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
                 </div>
             </div>
@@ -584,7 +708,7 @@ linkConsolas.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <div class="galeriaFlex">
                       <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                       <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -632,7 +756,7 @@ linkConsolas.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
                 </div>
             </div>
@@ -680,7 +804,7 @@ linkDiversos.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <div class="galeriaFlex">
                       <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                       <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -728,7 +852,7 @@ linkDiversos.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
                 </div>
             </div>
@@ -789,7 +913,7 @@ btnBuscar.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <div class="galeriaFlex">
                       <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                       <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -802,7 +926,11 @@ btnBuscar.addEventListener("click", () => {
             }
           );
         } else {
-          alert("No se encontraron artículos para la búsqueda solicitada!");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "No se encontraron artículos para la búsqueda solicitada!",
+          });
         }
       })
       .catch((error) => {
@@ -854,7 +982,7 @@ btnBuscar.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a href="#" class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
                 </div>
             </div>
@@ -863,7 +991,11 @@ btnBuscar.addEventListener("click", () => {
             }
           );
         } else {
-          alert("No se encontraron artículos para la búsqueda solicitada!");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "No se encontraron artículos para la búsqueda solicitada!",
+          });
         }
       })
       .catch((error) => {
@@ -875,8 +1007,16 @@ btnBuscar.addEventListener("click", () => {
 
 btnEnviar.addEventListener("click", (e) => {
   e.preventDefault();
-  inputNyA.value = "";
-  mensajeParaEnviar.value = "";
+  if (inputNyA.value == "" || mensajeParaEnviar.value == "") {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debe llenar los campos de forma correcta!",
+    });
+  } else {
+    inputNyA.value = "";
+    mensajeParaEnviar.value = "";
+  }
 });
 
 btnLogin.addEventListener("click", () => {
@@ -908,7 +1048,7 @@ btnLogin.addEventListener("click", () => {
     />
   </div>
   <!-- Submit button -->
-  <button type="submit" class="btn btn-primary btn-block mb-4" id="btnAdmin">
+  <button type="button" class="btn btn-primary btn-block mb-4" id="btnAdmin">
     Entrar
   </button>
 </form>
@@ -977,7 +1117,7 @@ btnLogin.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <div class="galeriaFlex">
                       <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                       <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -999,7 +1139,7 @@ btnLogin.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <div class="galeriaFlex">
                       <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                       <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -1022,7 +1162,7 @@ btnLogin.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <div class="galeriaFlex">
                       <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                       <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -1100,7 +1240,7 @@ btnLogin.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a class="btn btn-primary verDetalle" id=${id}>Ver producto</a>
                 </div>
             </div>
@@ -1118,7 +1258,7 @@ btnLogin.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
                 </div>
             </div>
@@ -1137,7 +1277,7 @@ btnLogin.addEventListener("click", () => {
                 />
                 <div class="card-body">
                     <h5 class="card-title">${nombre}</h5>
-                    <p class="card-text">${precio}</p>
+                    <p class="card-text">$${precio}</p>
                     <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
                 </div>
             </div>
@@ -1153,7 +1293,11 @@ btnLogin.addEventListener("click", () => {
           });
       });
     } else {
-      alert("Credenciales incorrectas!");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Credenciales incorrectas!",
+      });
     }
   });
 });
@@ -1163,12 +1307,12 @@ divProducto.addEventListener("click", (e) => {
     let id = e.target.getAttribute("id");
     divProducto.innerHTML = "";
     dbServices
-      .detalleProdcuto(id)
+      .detalleProducto(id)
       .then((data) => {
         divProducto.innerHTML += `
             <div class="card mb-3" style="max-width: 2500px">
             <div class="row g-0 centradoVerticalDetalle">
-              <div class="col-md-6">
+              <div class="col-md-6 expandirFotoDetalle">
                 <img
                   src="${data.img}"
                   class="img-fluid rounded-start"
@@ -1178,9 +1322,9 @@ divProducto.addEventListener("click", (e) => {
               <div class="col-md-4">
                 <div class="card-body">
                   <h5 class="card-title">${data.nombre}</h5>
-                  <p class="card-text">"${data.descripcion}"</p>
+                  <p class="card-text">${data.descripcion}</p>
                   <p class="card-text">
-                    <small>"${data.precio}"</small>
+                    <small>$${data.precio}</small>
                   </p>
                 </div>
               </div>
@@ -1297,7 +1441,7 @@ divProducto.addEventListener("click", (e) => {
             />
             <div class="card-body">
                 <h5 class="card-title">${nombre}</h5>
-                <p class="card-text">${precio}</p>
+                <p class="card-text">$${precio}</p>
                 <div class="galeriaFlex">
                 <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                 <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -1319,7 +1463,7 @@ divProducto.addEventListener("click", (e) => {
             />
             <div class="card-body">
                 <h5 class="card-title">${nombre}</h5>
-                <p class="card-text">${precio}</p>
+                <p class="card-text">$${precio}</p>
                 <div class="galeriaFlex">
                 <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                 <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -1342,7 +1486,7 @@ divProducto.addEventListener("click", (e) => {
             />
             <div class="card-body">
                 <h5 class="card-title">${nombre}</h5>
-                <p class="card-text">${precio}</p>
+                <p class="card-text">$${precio}</p>
                 <div class="galeriaFlex">
                 <a class="btn btn-primary verDetalle tamanioEditarEliminar" id=${id}>Ver</a>
                 <a class="btn btn-primary eliminarProducto tamanioEditarEliminar" id=${id}>Eliminar</a>
@@ -1409,7 +1553,7 @@ divProducto.addEventListener("click", (e) => {
             />
             <div class="card-body">
                 <h5 class="card-title">${nombre}</h5>
-                <p class="card-text">${precio}</p>
+                <p class="card-text">$${precio}</p>
                 <a class="btn btn-primary verDetalle" id=${id}>Ver producto</a>
             </div>
         </div>
@@ -1427,7 +1571,7 @@ divProducto.addEventListener("click", (e) => {
             />
             <div class="card-body">
                 <h5 class="card-title">${nombre}</h5>
-                <p class="card-text">${precio}</p>
+                <p class="card-text">$${precio}</p>
                 <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
             </div>
         </div>
@@ -1446,7 +1590,7 @@ divProducto.addEventListener("click", (e) => {
             />
             <div class="card-body">
                 <h5 class="card-title">${nombre}</h5>
-                <p class="card-text">${precio}</p>
+                <p class="card-text">$${precio}</p>
                 <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
             </div>
         </div>
@@ -1478,6 +1622,148 @@ divProducto.addEventListener("click", (e) => {
   }
 });
 
+divProducto.addEventListener("click", (e) => {
+  if (e.target.classList.contains("editarProducto")) {
+    e.preventDefault();
+    let id = e.target.getAttribute("id");
+
+    divProducto.innerHTML = "";
+
+    let formEditarProducto = `
+    <div class="formAgregarEditarProducto">
+    <form action="">
+      <h3>Editar Producto</h3>
+      <div class="mb-4">
+        <label for="urlImagenProducto" class="form-label"
+          >URL de la imagen</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="urlImagenProducto"
+          placeholder="Ingrese la URL de la imagen"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="categoriaProducto" class="form-label"
+          >Categoría del producto</label
+        >
+        <select name="categorias" id="categoriaProducto" title="Star Wars">
+        <option value="Star Wars">Star Wars</option>
+        <option value="Consolas">Consolas</option>
+        <option value="Diversos">Diversos</option>
+      </select>
+      </div>
+      <div class="mb-3">
+        <label for="nombreProducto" class="form-label"
+          >Nombre del producto</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="nombreProducto"
+          placeholder="Ingrese el nombre del producto"
+          required
+          maxlength="20"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="precioProducto" class="form-label"
+          >Precio del producto</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="precioProducto"
+          placeholder="Ingrese el precio del producto"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="descripcionProdcuto" class="form-label"
+          >Descripción del prodcuto</label
+        >
+        <textarea
+          class="form-control"
+          id="descripcionProdcuto"
+          rows="5"
+          cols="5"
+          required
+          maxlength="150"
+        ></textarea>
+      </div>
+      <div class="col-auto">
+        <button
+          type="button"
+          class="btn btn-primary mb-3"
+          id="btnAgregarEditarProducto"
+        >
+          Editar Producto
+        </button>
+      </div>
+    </form>
+  </div>
+    `;
+
+    divProducto.innerHTML += formEditarProducto;
+
+    let urlImagen = document.getElementById("urlImagenProducto");
+    let categoriaProducto = document.getElementById("categoriaProducto");
+    let nombreProducto = document.getElementById("nombreProducto");
+    let precioProducto = document.getElementById("precioProducto");
+    let descripcionProdcuto = document.getElementById("descripcionProdcuto");
+    let btnAgregarEditarProducto = document.getElementById(
+      "btnAgregarEditarProducto"
+    );
+
+    dbServices
+      .detalleProducto(id)
+      .then((data) => {
+        urlImagen.value = data.img;
+        categoriaProducto.value = data.categoria;
+        nombreProducto.value = data.nombre;
+        precioProducto.value = data.precio;
+        descripcionProdcuto.value = data.descripcion;
+      })
+      .catch((error) => {
+        alert("Ocurrió un error al traer el detalle de este producto");
+        console.log(error);
+      });
+
+    btnAgregarEditarProducto.addEventListener("click", (e) => {
+      if (
+        urlImagen.value != "" &&
+        categoriaProducto.value != "" &&
+        nombreProducto.value != "" &&
+        precioProducto.value != "" &&
+        descripcionProdcuto.value != ""
+      ) {
+        dbServices
+          .actualizarProducto(
+            id,
+            nombreProducto.value,
+            precioProducto.value,
+            descripcionProdcuto.value,
+            categoriaProducto.value,
+            urlImagen.value
+          )
+          .then()
+          .catch((error) => {
+            alert("Ocurrió un error al editar el producto elegido");
+            console.log(error);
+          });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Tiene que llenar todos los campos para editar el producto!",
+        });
+      }
+    });
+  }
+});
+
 //flujo
 
 dbServices
@@ -1495,7 +1781,7 @@ dbServices
               />
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
+                  <p class="card-text">$${precio}</p>
                   <a class="btn btn-primary verDetalle" id=${id}>Ver producto</a>
               </div>
           </div>
@@ -1513,7 +1799,7 @@ dbServices
               />
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
+                  <p class="card-text">$${precio}</p>
                   <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
               </div>
           </div>
@@ -1532,7 +1818,7 @@ dbServices
               />
               <div class="card-body">
                   <h5 class="card-title">${nombre}</h5>
-                  <p class="card-text">${precio}</p>
+                  <p class="card-text">$${precio}</p>
                   <a class="btn btn-primary verDetalle" id="${id}">Ver producto</a>
               </div>
           </div>
